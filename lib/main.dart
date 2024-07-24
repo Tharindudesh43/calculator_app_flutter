@@ -467,7 +467,7 @@ class _CalculatorState extends State<Calculator> {
                 ),
                 calbutton('%', const Color.fromARGB(255, 99, 60, 112),
                     const Color.fromARGB(255, 232, 188, 238)),
-                calbutton('/', const Color.fromARGB(255, 99, 60, 112),
+                calbutton('/', const Color.fromARGB(255, 99, 60, 113),
                     const Color.fromARGB(255, 232, 188, 238)),
               ],
             ),
