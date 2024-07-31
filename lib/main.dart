@@ -263,7 +263,7 @@ class _CalculatorState extends State<Calculator> {
         storeData.clear();
       }
     } else {
-      if (storeData.length < 18 && PrevData.length < 37) {
+      if (storeData.length < 15 && PrevData.length < 20) {
         storeData.add(data);
         txtvalue = storeData.join();
         setState(() {
@@ -355,28 +355,28 @@ class _CalculatorState extends State<Calculator> {
   }
 
   Widget calbutton(String btntxt, Color btncolor, Color btntxtcolor) {
-    return Container(
-      child: TextButton(
-        onPressed: () {
-          storevalues_and_cal(btntxt);
+    return TextButton(
+      onPressed: () {
+        storevalues_and_cal(btntxt);
 
-          setState(() {
-            btntxt;
-          });
+        setState(() {
+          btntxt;
+        });
 
-          //Data in Storedata
-          print(storeData);
-        },
+        //Data in Storedata
+        print(storeData);
+      },
+      child: Center(
         child: Text(
           btntxt,
-          style: TextStyle(fontSize: 30, fontWeight: FontWeight.w600),
+          style: TextStyle(fontSize: 40, fontWeight: FontWeight.w600),
         ),
-        style: TextButton.styleFrom(
-          foregroundColor: btntxtcolor,
-          backgroundColor: btncolor,
-          shape: const CircleBorder(),
-          padding: const EdgeInsets.all(10),
-        ),
+      ),
+      style: TextButton.styleFrom(
+        foregroundColor: btntxtcolor,
+        backgroundColor: btncolor,
+        shape: const CircleBorder(),
+        minimumSize: Size(85, 85),
       ),
     );
   }
@@ -384,12 +384,12 @@ class _CalculatorState extends State<Calculator> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.black,
+      backgroundColor: Color.fromARGB(255, 18, 28, 34),
       appBar: AppBar(
         title: const Text(
           "Calculator",
           style: TextStyle(
-            color: Colors.white,
+            color: Color.fromARGB(255, 232, 232, 232),
             fontFamily: 'Poppins',
           ),
         ),
@@ -409,7 +409,8 @@ class _CalculatorState extends State<Calculator> {
                   padding: const EdgeInsets.all(8.0),
                   child: Text(
                     PreVCalations,
-                    style: TextStyle(color: Colors.white, fontSize: 15),
+                    style: TextStyle(
+                        color: Colors.white, fontSize: 30, fontFamily: 'Carre'),
                   ),
                 )
               ],
@@ -424,9 +425,7 @@ class _CalculatorState extends State<Calculator> {
                     txtvalue,
                     textAlign: TextAlign.left,
                     style: const TextStyle(
-                      color: Colors.white,
-                      fontSize: 30,
-                    ),
+                        color: Colors.white, fontSize: 40, fontFamily: 'Carre'),
                   ),
                 )
               ],
@@ -434,7 +433,7 @@ class _CalculatorState extends State<Calculator> {
 
             //First Row---------------------
             Row(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: [
                 TextButton(
                   onPressed: () {
@@ -451,20 +450,40 @@ class _CalculatorState extends State<Calculator> {
                   },
                   child: Text(
                     "AC",
-                    style: TextStyle(fontSize: 30, fontWeight: FontWeight.w600),
+                    style: TextStyle(fontSize: 40, fontWeight: FontWeight.w400),
                   ),
                   style: TextButton.styleFrom(
                     foregroundColor: const Color.fromARGB(255, 196, 211, 238),
                     backgroundColor: const Color.fromARGB(255, 43, 91, 158),
-                    shape: const StadiumBorder(),
-                    padding: const EdgeInsets.fromLTRB(
-                      51,
-                      7,
-                      51,
-                      7,
-                    ),
+                    shape: const CircleBorder(),
+                    minimumSize: Size(85, 85),
                   ),
                 ),
+                Container(
+                    width: 83,
+                    height: 83,
+                    decoration: BoxDecoration(
+                      color: const Color.fromARGB(255, 43, 91, 158), //
+                      shape: BoxShape.circle,
+                    ),
+                    child: IconButton(
+                        onPressed: () {
+                          storeData.removeLast();
+                          PrevData.removeLast();
+                          setState(() {
+                            PreVCalations = PrevData.join();
+                          });
+                          setState(() {
+                            txtvalue = storeData.join("");
+                          });
+                          count = 0;
+                          lastvalue = 0;
+                        },
+                        icon: Icon(
+                          Icons.backspace_rounded,
+                          size: 40,
+                          color: Color.fromARGB(255, 185, 179, 158),
+                        ))),
                 calbutton('%', const Color.fromARGB(255, 99, 60, 112),
                     const Color.fromARGB(255, 232, 188, 238)),
                 calbutton('/', const Color.fromARGB(255, 99, 60, 113),
@@ -477,7 +496,7 @@ class _CalculatorState extends State<Calculator> {
 
             //Second Row------------------
             Row(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: [
                 calbutton('7', const Color.fromARGB(255, 35, 35, 35),
                     const Color.fromARGB(255, 187, 179, 179)),
@@ -498,7 +517,7 @@ class _CalculatorState extends State<Calculator> {
 
             //Third Row------------------
             Row(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: [
                 calbutton('4', const Color.fromARGB(255, 35, 35, 35),
                     const Color.fromARGB(255, 187, 179, 179)),
@@ -516,7 +535,7 @@ class _CalculatorState extends State<Calculator> {
 
             //Fourth Row------------------
             Row(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: [
                 calbutton('1', const Color.fromARGB(255, 35, 35, 35),
                     const Color.fromARGB(255, 187, 179, 179)),
@@ -534,7 +553,7 @@ class _CalculatorState extends State<Calculator> {
 
             //Fifth Row--------------------
             Row(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: [
                 TextButton(
                   onPressed: () {
@@ -544,17 +563,17 @@ class _CalculatorState extends State<Calculator> {
                   },
                   child: Text(
                     "0",
-                    style: TextStyle(fontSize: 30, fontWeight: FontWeight.w600),
+                    style: TextStyle(fontSize: 40, fontWeight: FontWeight.w600),
                   ),
                   style: TextButton.styleFrom(
                     foregroundColor: const Color.fromARGB(255, 187, 179, 179),
                     backgroundColor: const Color.fromARGB(255, 35, 35, 35),
                     shape: const StadiumBorder(),
                     padding: const EdgeInsets.fromLTRB(
-                      62.5,
-                      7,
-                      62.5,
-                      7,
+                      83,
+                      14,
+                      83,
+                      14,
                     ),
                   ),
                 ),
@@ -564,6 +583,10 @@ class _CalculatorState extends State<Calculator> {
                     const Color.fromARGB(255, 206, 223, 194)),
               ],
             ),
+
+            SizedBox(
+              height: 20,
+            )
           ],
         ),
       ),

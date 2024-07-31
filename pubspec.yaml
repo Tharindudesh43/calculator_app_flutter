@@ -95,6 +95,9 @@ flutter:
     - family: Poppins
       fonts:
         - asset: fonts/Poppins-Medium.otf
+    - family: Carre
+      fonts:
+        - asset: fonts/Carre.ttf
   # fonts:
   #   - family: Schyler
   #     fonts:
